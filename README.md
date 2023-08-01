@@ -2,6 +2,8 @@
 
 this is a project for dealing with wikifunctions objects in JSON.
 
+This project is dual-licensed under MIT and Apache 2.0.
+
 # Rust function evaluator
 
 the function evaluator is currently a demo, with plans to be incorporated to the

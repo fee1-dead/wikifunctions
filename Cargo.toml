@@ -1,6 +1,11 @@
 [workspace]
 members = ["wf-evaluator", "wfrt"]
 
+[workspace.package]
+authors = ["Deadbeef <ent3rm4n@gmail.com>"]
+edition = "2021"
+license = "MIT or Apache-2"
+
 [workspace.dependencies]
 serde = { version = "1.0.177", features = ["derive"] }
 serde_json = "1.0.104"
@@ -8,7 +13,9 @@ serde_json = "1.0.104"
 [package]
 name = "wikifunctions"
 version = "0.1.0"
-edition = "2021"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
