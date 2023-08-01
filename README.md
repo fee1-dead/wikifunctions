@@ -8,6 +8,8 @@ the function evaluator is currently a demo, with plans to be incorporated to the
 main project. The evaluator currently uses libloading to compile and load functions
 dynamically.
 
+Contributions are welcomed!
+
 ## How to run
 
 Make sure you have the latest stable Rust toolchain installed on the system.
