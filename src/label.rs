@@ -40,4 +40,4 @@ macro_rules! impl_zlabel {
     };
 }
 
-impl_zlabel!(Z6 Z7 Z9 Z11 Z12 Z16 Z17 Z22 Z24 Z60 Z61 Z881);
+impl_zlabel!(Z6 Z7 Z9 Z11 Z12 Z14 Z16 Z17 Z22 Z24 Z60 Z61 Z881);

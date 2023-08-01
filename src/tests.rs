@@ -6,7 +6,9 @@ use crate::model::{Object, Pair, ZString, ZUnit};
 
 #[test]
 pub fn serialize_list() -> Result<(), Box<dyn Error>> {
-    let list = TypedList::<ZString> { inner: vec!["1".into(), "2".into()] };
+    let list = TypedList::<ZString> {
+        inner: vec!["1".into(), "2".into()],
+    };
     let obj = Object::new(list);
     let s = to_string_pretty(&obj)?;
     println!("{s}"); // TODO assert

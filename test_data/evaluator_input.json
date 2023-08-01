@@ -1,0 +1,14 @@
+{
+    "codeString": "fn Z1234(Z1000K1: String, Z1000K2: String) -> String { format!(\"{Z1000K1}{Z1000K2}\") }",
+    "functionName": "Z1234",
+    "functionArguments": {
+        "Z1000K1": {
+            "Z1K1": "Z6",
+            "Z6K1": "5"
+        },
+        "Z1000K2": {
+            "Z1K1": "Z6",
+            "Z6K1": "8"
+        }
+    }
+}

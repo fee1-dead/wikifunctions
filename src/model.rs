@@ -12,7 +12,7 @@ pub type ZUnit = Reference<label::Z24>;
 
 /// a Z9/reference
 #[derive(Deserialize, Serialize, Debug, Default)]
-pub struct Reference<Id> {
+pub struct Reference<Id = String> {
     #[serde(rename = "Z9K1")]
     pub id: Id,
 }
@@ -29,7 +29,6 @@ pub struct NaturalLanguage {
     #[serde(rename = "Z60K2", with = "object")]
     pub code_aliases: TypedList<ZString>,
 }
-
 
 /// A Z11/monolingual text.
 #[derive(Serialize, Deserialize, Debug)]
@@ -61,26 +60,55 @@ pub struct Argument<Type: ZObject> {
 
 /// A Z8/function.
 #[derive(Serialize, Deserialize, Debug)]
-pub struct Function<Type: ZObject, ReturnType: ZObject, TestCase: ZObject, Implementation: ZObject, Identity: ZObject> {
+pub struct Function<
+    Type: ZObject,
+    ReturnType: ZObject,
+    TestCase: ZObject,
+    Implementation: ZObject,
+    Identity: ZObject,
+> {
     #[serde(rename = "Z8K1", with = "object")]
     #[serde(bound(serialize = "Type: Serialize", deserialize = "Type: Deserialize<'de>"))]
     pub arguments: TypedList<Argument<Type>>,
 
     #[serde(rename = "Z8K2", with = "object")]
-    #[serde(bound(serialize = "ReturnType: Serialize", deserialize = "ReturnType: Deserialize<'de>"))]
+    #[serde(bound(
+        serialize = "ReturnType: Serialize",
+        deserialize = "ReturnType: Deserialize<'de>"
+    ))]
     pub return_type: ReturnType,
 
     #[serde(rename = "Z8K3", with = "object")]
-    #[serde(bound(serialize = "TestCase: Serialize", deserialize = "TestCase: Deserialize<'de>"))]
+    #[serde(bound(
+        serialize = "TestCase: Serialize",
+        deserialize = "TestCase: Deserialize<'de>"
+    ))]
     pub test_cases: TypedList<TestCase>,
 
     #[serde(rename = "Z8K4", with = "object")]
-    #[serde(bound(serialize = "Implementation: Serialize", deserialize = "Implementation: Deserialize<'de>"))]
+    #[serde(bound(
+        serialize = "Implementation: Serialize",
+        deserialize = "Implementation: Deserialize<'de>"
+    ))]
     pub implementations: TypedList<Implementation>,
 
     #[serde(rename = "Z8K5", with = "object")]
-    #[serde(bound(serialize = "Identity: Serialize", deserialize = "Identity: Deserialize<'de>"))]
+    #[serde(bound(
+        serialize = "Identity: Serialize",
+        deserialize = "Identity: Deserialize<'de>"
+    ))]
     pub identity: Identity,
+}
+
+/// An Z14/implementation
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Implementation<Fn: ZObject> {
+    /// The function that this implementation is for
+    #[serde(rename = "Z14K1", with = "object")]
+    #[serde(bound(serialize = "Fn: Serialize", deserialize = "Fn: Deserialize<'de>"))]
+    pub function: Fn,
+    #[serde(rename = "Z14K3", with = "object")]
+    pub code: Code,
 }
 
 /// A Z6/string
@@ -94,7 +122,7 @@ impl From<&'_ str> for ZString {
     #[inline]
     fn from(value: &'_ str) -> Self {
         Self {
-            value: value.into()
+            value: value.into(),
         }
     }
 }
@@ -160,6 +188,7 @@ impl_zobject! {
     @[Func: ZObject, Args] FunctionCall<Func, Args> = Z7,
     MonolingualText = Z11,
     MultilingualText = Z12,
+    @[Fn: ZObject] Implementation<Fn> = Z14,
     Code = Z16,
     @[Type: ZObject] Argument<Type> = Z17,
     @[A: ZObject, B: ZObject] Pair<A, B> = Z22,
